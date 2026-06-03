@@ -1,0 +1,125 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Historical Object Detection</title>
+
+<style>
+
+body{
+font-family:Arial;
+background:linear-gradient(to right,#ff9966,#ff5e62);
+padding:30px;
+text-align:center;
+}
+
+.container{
+background:#111;
+width:75%;
+margin:auto;
+padding:25px;
+border-radius:15px;
+box-shadow:0 5px 20px rgba(0,0,0,0.3);
+color:white;
+}
+
+h1{
+color:white;
+}
+
+video{
+width:85%;
+border:4px solid #ff5e62;
+border-radius:12px;
+margin-top:20px;
+background:black;
+}
+
+button{
+padding:12px 20px;
+background:#ff5e62;
+color:white;
+border:none;
+border-radius:8px;
+cursor:pointer;
+margin-top:20px;
+font-size:16px;
+}
+
+button:hover{
+background:#e63946;
+}
+
+#status{
+margin-top:20px;
+font-size:20px;
+color:#00ff99;
+}
+
+.instructions{
+margin-top:20px;
+font-size:16px;
+color:#ddd;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Historical Object Detection</h1>
+
+<video id="video" autoplay playsinline muted></video>
+
+<br>
+
+<button id="startBtn">Start Camera</button>
+
+<div id="status">Camera Not Started</div>
+
+<div class="instructions">
+<p>Allow camera permission when browser asks.</p>
+<p>Use Chrome browser or VS Code Live Server.</p>
+</div>
+
+</div>
+
+<script>
+
+const video = document.getElementById("video");
+const statusText = document.getElementById("status");
+
+document.getElementById("startBtn").addEventListener("click", startCamera);
+
+async function startCamera(){
+
+try{
+
+const stream = await navigator.mediaDevices.getUserMedia({
+video:true,
+audio:false
+});
+
+video.srcObject = stream;
+
+statusText.innerHTML = "Camera Working Successfully";
+
+}
+
+catch(error){
+
+statusText.innerHTML = "Please Allow Camera Permission";
+
+console.log(error);
+
+}
+
+}
+
+</script>
+
+</body>
+</html>
